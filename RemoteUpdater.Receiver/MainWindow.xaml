@@ -36,8 +36,8 @@
                             <ColumnDefinition Width="5"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Rectangle Width="5" Margin="9,0,5,0" Height="23" Fill="{Binding StatusColor, Mode=OneWay}"/>
-                        <TextBlock Grid.Column="1" VerticalAlignment="Center">Update-Status</TextBlock>
+                        <Rectangle Width="5" Margin="9,0,5,0" Height="23" Fill="{Binding StatusColor, Mode=OneWay}" Visibility="{Binding Path=StatusColorVisible, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Visibility="{Binding Path=StatusColorVisible, Converter={StaticResource VisibleIfTrueConverter}}">Update-Status</TextBlock>
                         <Button Grid.Column="3" Height="23" Width="23" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="RemoveAllButton" Command="{Binding SelectTarget4AllCommand}" ToolTip="Zielordner für alle Dateie(n) festlegen">
                             <Image Source="{StaticResource FolderIconSource}" Margin="1,3,1,1"/>
                         </Button>
@@ -48,7 +48,7 @@
 
                     <ListView Grid.Row="3" Margin="10,0" x:Name="FilesListView" ItemsSource="{Binding Files}" SelectionChanged="OnSelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible">
                         <ListView.ContextMenu>
-                            <ContextMenu>
+                            <ContextMenu Visibility="{Binding Path=ContextMenuVisible, Converter={StaticResource VisibleIfTrueConverter}}">
                                 <MenuItem Command="{Binding SelectTarget4SelectedCommand}" Header="Zielordner für selektierte Dateie(n) festlegen">
                                     <MenuItem.Icon>
                                         <Image Source="{StaticResource FolderIconSource}" Margin="2,3,2,2"/>

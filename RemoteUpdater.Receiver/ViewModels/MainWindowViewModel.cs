@@ -35,6 +35,10 @@ namespace RemoteUpdater.Receiver
             }
         }
 
+        public bool ContextMenuVisible => _selectedFiles.Any();
+
+        public bool StatusColorVisible => Files.Any();
+
         public Brush StatusColor { get; private set; } = StatusColorHelper.GetStatusColor(UpdateStatus.WasIgnored);
 
         public FilesViewModel Files { get; set; } = new FilesViewModel();
@@ -45,6 +49,7 @@ namespace RemoteUpdater.Receiver
             set
             {
                 _selectedFiles = value;
+                OnPropertyChanged(nameof(ContextMenuVisible));
                 UpdateButtons();
             }
         }
@@ -68,6 +73,7 @@ namespace RemoteUpdater.Receiver
 
             SelectTarget4AllCommand = new RelayCommand(() => SelectTargetFolder(Files), () => Files.Any());
             SelectTarget4SelectedCommand = new RelayCommand(() => SelectTargetFolder(SelectedFiles), () => SelectedFiles.Any());
+
         }
 
         private async Task<List<UpdateResultDto>> OnFilesReceived(List<TransferFileDto> transferFiles)
@@ -78,6 +84,8 @@ namespace RemoteUpdater.Receiver
             {
                 await AddOrUpdateFile(file);
             }
+
+            OnPropertyChanged(nameof(StatusColorVisible));
 
             var result = ExecuteUpdateAndActions();
 
@@ -189,6 +197,8 @@ namespace RemoteUpdater.Receiver
                 newFile.ResetStatus();
                 Files.Add(newFile);
             }
+
+            OnPropertyChanged(nameof(StatusColorVisible));
         }
 
         private async Task AddOrUpdateFile(TransferFileDto transferFile)
