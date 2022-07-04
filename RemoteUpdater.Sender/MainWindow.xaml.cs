@@ -43,11 +43,14 @@ namespace RemoteUpdater.Sender
 
         private void OnUpdateErrorOccured()
         {
-            DispatcherHelper.CheckDispatcherAndRun(() =>
+            if (SettingsHelper.Settings.BringToFrontOnError)
             {
-                this.BringToFront();
-                FilesTabItem.IsSelected = true;
-            });
+                DispatcherHelper.CheckDispatcherAndRun(() =>
+                {
+                    this.BringToFront();
+                    FilesTabItem.IsSelected = true;
+                });
+            }
         }
 
         private void OnShowMessage(MessageDto message)

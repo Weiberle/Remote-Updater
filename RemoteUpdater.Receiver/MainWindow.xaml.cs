@@ -57,11 +57,14 @@ namespace RemoteUpdater.Receiver
 
         private void OnUpdateErrorOccured()
         {
-            DispatcherHelper.CheckDispatcherAndRun(() =>
+            if (SettingsHelper.Settings.BringToFrontOnError)
             {
-                this.BringToFront();
-                FilesTabItem.IsSelected = true;
-            });
+                DispatcherHelper.CheckDispatcherAndRun(() =>
+                {
+                    this.BringToFront();
+                    FilesTabItem.IsSelected = true;
+                });
+            }
         }
 
         private async Task OnRestart()

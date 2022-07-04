@@ -187,7 +187,7 @@ namespace RemoteUpdater.Sender.ViewModels
                 }
             }
 
-            if (SettingsHelper.Settings.BringToFrontOnError && updateResults.Any(ur => ur.Status == UpdateStatus.WasNotUpdatedError))
+            if (updateResults.Any(ur => ur.Status == UpdateStatus.WasNotUpdatedError))
             {
                 UpdateErrorOccured?.Invoke();
             }

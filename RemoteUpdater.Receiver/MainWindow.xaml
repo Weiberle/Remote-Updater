@@ -114,12 +114,16 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="5"/>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" HorizontalAlignment="Right" FontWeight="Bold">IP-Adresse:</Label>
                     <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Ip4Address}"></TextBlock>
                     <Label Grid.Row="2" HorizontalAlignment="Right" FontWeight="Bold">Port:</Label>
                     <TextBox Grid.Row="2" Grid.Column="2" Width="70" HorizontalAlignment="Left" AcceptsReturn="False" VerticalAlignment="Center" Text="{Binding Port}"></TextBox>
+                    <Label Grid.Row="4" HorizontalAlignment="Right" FontWeight="Bold">In den Vordergrund bei Update-Fehler:</Label>
+                    <CheckBox Grid.Row="4" Grid.Column="2" Width="16" HorizontalAlignment="Left" IsChecked="{Binding BringToFrontOnError}" VerticalAlignment="Center"/>
                 </Grid>
             </TabItem>
 

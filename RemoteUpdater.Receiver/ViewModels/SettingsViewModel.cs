@@ -28,5 +28,21 @@ namespace RemoteUpdater.Receiver
                 return IpAddressHelper.GetIp4Address();
             }
         }
+
+        public bool BringToFrontOnError
+        {
+            get
+            {
+                return Helper.SettingsHelper.Settings.BringToFrontOnError;
+            }
+            set
+            {
+                if (value != Helper.SettingsHelper.Settings.BringToFrontOnError)
+                {
+                    Helper.SettingsHelper.Settings.BringToFrontOnError = value;
+                    OnPropertyChanged(nameof(BringToFrontOnError));
+                }
+            }
+        }
     }
 }
