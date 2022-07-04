@@ -1,0 +1,128 @@
+﻿<Window x:Class="RemoteUpdater.Receiver.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:core="clr-namespace:RemoteUpdater.PlugIns.Core.Views;assembly=RemoteUpdater.PlugIns.Core"
+        mc:Ignorable="d"
+        IsEnabled="{Binding IsEnabled}"
+        SnapsToDevicePixels="True"
+        WindowStartupLocation="CenterScreen"
+        Title="Remote Updater Empfänger" MinHeight="250" MinWidth="500" Height="450" Width="800" Background="{x:Static SystemColors.ControlBrush}">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+        <BitmapImage x:Key="FolderIconSource" UriSource="./Images/Folder.png" />
+        <BitmapImage x:Key="FolderSelectedIconSource" UriSource="./Images/FolderSelected.png" />
+        <BitmapImage x:Key="ArrowIconSource" UriSource="./Images/Arrow.png" />
+    </Window.Resources>
+    <Grid >
+        <TabControl Margin="20">
+            <TabItem Header="Empfangene Dateien" Name="FilesTabItem" Width="140" Height="30">
+                <Grid Grid.IsSharedSizeScope="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid x:Name="ButtonGrid" Grid.Row="1" Margin="10,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Width="5" Margin="9,0,5,0" Height="23" Fill="{Binding StatusColor, Mode=OneWay}"/>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center">Update-Status</TextBlock>
+                        <Button Grid.Column="3" Height="23" Width="23" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="RemoveAllButton" Command="{Binding SelectTarget4AllCommand}" ToolTip="Zielordner für alle Dateie(n) festlegen">
+                            <Image Source="{StaticResource FolderIconSource}" Margin="1,3,1,1"/>
+                        </Button>
+                        <Button Grid.Column="5" Height="23" Width="23" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="AddButton" Command="{Binding SelectTarget4SelectedCommand}" ToolTip="Zielordner für selektierte Dateie(n) festlegen">
+                            <Image Source="{StaticResource FolderSelectedIconSource}" Margin="1,3,1,1"/>
+                        </Button>
+                    </Grid>
+
+                    <ListView Grid.Row="3" Margin="10,0" x:Name="FilesListView" ItemsSource="{Binding Files}" SelectionChanged="OnSelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Command="{Binding SelectTarget4SelectedCommand}" Header="Zielordner für selektierte Dateie(n) festlegen">
+                                    <MenuItem.Icon>
+                                        <Image Source="{StaticResource FolderIconSource}" Margin="2,3,2,2"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Command="{Binding SelectTarget4AllCommand}" Header="Zielordner für alle Dateien festlegen">
+                                    <MenuItem.Icon>
+                                        <Image Source="{StaticResource FolderIconSource}" Margin="2,3,2,2"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="2" HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <!-- Farbiger Balken -->
+                                        <ColumnDefinition Width="5"/>
+                                        <ColumnDefinition Width="*" SharedSizeGroup="A"/>
+                                        <!-- Dateiname -->
+                                        <ColumnDefinition Width="auto"/>
+                                        <!-- Pfeil -->
+                                        <ColumnDefinition Width="*" SharedSizeGroup="B"/>
+                                        <!-- Zielverzeichnis -->
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="5"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <!-- Button -->
+                                        <ColumnDefinition Width="2"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Rectangle Width="5" Height="23" Fill="{Binding StatusColor, Mode=OneWay}"/>
+                                    <TextBlock Grid.Column="2" Text="{Binding SourceFile}" VerticalAlignment="Center"/>
+                                    <Image Grid.Column="3" Margin="5,0" Source="{StaticResource ArrowIconSource}" Visibility="{Binding Path=TargetIsValid, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                                    <TextBlock  Grid.Column="4" Text="{Binding TargetFolder}" VerticalAlignment="Center"/>
+                                    <Button Grid.Column="7" Width="23" Height="23" Command="{Binding SelectTargetCommand}" VerticalAlignment="Center" ToolTip="Zielordner festlegen">
+                                        <Image Source="{StaticResource FolderIconSource}" Margin="1,3,1,1"/>
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Actions" Width="140" Height="30" DataContext="{Binding PlugInsVm}">
+                <core:PlugInsView Margin="10"></core:PlugInsView>
+            </TabItem>
+
+            <TabItem Header="Einstellungen" Width="140" Height="30" DataContext="{Binding SettingsVm}">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" HorizontalAlignment="Right" FontWeight="Bold">IP-Adresse:</Label>
+                    <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Ip4Address}"></TextBlock>
+                    <Label Grid.Row="2" HorizontalAlignment="Right" FontWeight="Bold">Port:</Label>
+                    <TextBox Grid.Row="2" Grid.Column="2" Width="70" HorizontalAlignment="Left" AcceptsReturn="False" VerticalAlignment="Center" Text="{Binding Port}"></TextBox>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>

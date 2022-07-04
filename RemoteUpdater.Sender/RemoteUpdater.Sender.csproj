@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <ApplicationIcon>Images\Sender.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\CheckBoxChecked.png" />
+    <None Remove="Images\CheckBoxUnchecked.png" />
+    <None Remove="Images\Folder.png" />
+    <None Remove="Images\FolderAdd.png" />
+    <None Remove="Images\Trashcan.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\Sender.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.6" />
+    <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RemoteUpdater.Common\RemoteUpdater.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\CheckBoxChecked.png" />
+    <Resource Include="Images\CheckBoxUnchecked.png" />
+    <Resource Include="Images\Folder.png" />
+    <Resource Include="Images\FolderAdd.png" />
+    <Resource Include="Images\Trashcan.png" />
+  </ItemGroup>
+
+</Project>

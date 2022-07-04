@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RemoteUpdater.Common\RemoteUpdater.Common.csproj" />
+    <ProjectReference Include="..\RemoteUpdater.Contracts\RemoteUpdater.Contracts.csproj" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="XCOPY &quot;$(TargetPath)&quot; &quot;$(SolutionDir)RemoteUpdater.Receiver\$(OutDir)\Plugins\StartStopWindowsServicePlugin\&quot; /S /Y" />
+  </Target>
+
+</Project>

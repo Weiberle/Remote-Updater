@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\Settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="gong-wpf-dragdrop" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RemoteUpdater.Common\RemoteUpdater.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="CopyActionSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="CopyActionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="PlugInsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\Settings.png" />
+  </ItemGroup>
+
+</Project>
