@@ -6,7 +6,7 @@ namespace RemoteUpdater.Sender.Settings
     {
         public string ReceiverIp { get; set; } 
 
-        public int ReceiverPort { get; set; } = 5000;
+        public uint ReceiverPort { get; set; } = 5000;
 
         public bool AutoUpdate { get; set; } = false;
 

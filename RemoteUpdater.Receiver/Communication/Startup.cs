@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RemoteUpdater.Receiver.Helper;
 
 namespace RemoteUpdater.Receiver.Communication
 {
@@ -16,7 +17,9 @@ namespace RemoteUpdater.Receiver.Communication
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSignalR(configure => { configure.MaximumReceiveMessageSize = null; configure.ClientTimeoutInterval = new System.TimeSpan(0, 5, 0); });
+            var timeout = new System.TimeSpan(0, (int)SettingsHelper.Settings.TimeOutInMinutes, 0);
+
+            services.AddSignalR(configure => { configure.MaximumReceiveMessageSize = null; configure.ClientTimeoutInterval = timeout; });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

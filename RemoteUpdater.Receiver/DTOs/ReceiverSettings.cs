@@ -6,7 +6,9 @@ namespace RemoteUpdater.Receiver.DTOs
     {
         public string LastTargetFoler { get; set; }
 
-        public int HttpPort { get; set; } = 5000;
+        public uint HttpPort { get; set; } = 5000;
+
+        public uint TimeOutInMinutes { get; set; } = 5;
 
         public bool BringToFrontOnError { get; set; } = true;
 

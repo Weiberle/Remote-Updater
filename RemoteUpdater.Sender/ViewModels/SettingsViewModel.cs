@@ -20,7 +20,7 @@ namespace RemoteUpdater.Sender.ViewModels
             }
         }
 
-        public int ReceiverPort
+        public uint ReceiverPort
         {
             get
             {

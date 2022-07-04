@@ -5,7 +5,7 @@ namespace RemoteUpdater.Receiver
 {
     public class SettingsViewModel : ViewModelBase
     {
-        public int Port
+        public uint Port
         {
             get
             {
@@ -41,6 +41,22 @@ namespace RemoteUpdater.Receiver
                 {
                     Helper.SettingsHelper.Settings.BringToFrontOnError = value;
                     OnPropertyChanged(nameof(BringToFrontOnError));
+                }
+            }
+        }
+
+        public uint TimeOut
+        {
+            get
+            {
+                return Helper.SettingsHelper.Settings.TimeOutInMinutes;
+            }
+            set
+            {
+                if (value >= 1 && value != Helper.SettingsHelper.Settings.TimeOutInMinutes)
+                {
+                    Helper.SettingsHelper.Settings.TimeOutInMinutes = value;
+                    OnPropertyChanged(nameof(TimeOut));
                 }
             }
         }
