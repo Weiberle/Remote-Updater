@@ -1,4 +1,7 @@
 # Remote-Updater
+
+![alt text](https://github.com/Weiberle/Remote-Updater/blob/master/ReadMeImages/RemoteUpdater_Overview.jpg?raw=true)
+
 The Remote-Updater is a developer tool to update files on a remote Windows PC (real or virtual). In some cases, the PC where the developer is working on, isn't neccesarily the PC where the software is tested by the developer. To deploy the new build versions of your DLLs, you normaly use postbuild steps, you write copy-scripts or in the worse case you do it all by hand. Especially copying new files to another PC makes this boring, repeating steps a little bit more complicated and anoying. Wouldn't it be nice to have a tool that makes this steps easyer and more flexible. A tool that visulizes, if the copy actions were successful or where you can pause some files from beeing copied with one click. A tool where you can add your own code, that is executed before or after the copy action is done e.g. to stop and start a Windows Service. This is where the Remote-Updater comes in and helps you to save your time.
 
 ## How to build Remote-Updater
