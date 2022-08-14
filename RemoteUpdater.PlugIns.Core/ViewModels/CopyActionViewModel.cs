@@ -1,6 +1,7 @@
 ﻿using Microsoft.Toolkit.Mvvm.Input;
 using RemoteUpdater.Common;
 using RemoteUpdater.Contracts;
+using RemoteUpdater.PlugIns.Core.Language;
 using RemoteUpdater.PlugIns.Core.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Forms;
@@ -48,7 +49,7 @@ namespace RemoteUpdater.PlugIns.Core.ViewModels
 
         public string ActionName { get; set; }
 
-        public string SettingsTitle => $"{ActionName} - Einstellungen";
+        public string SettingsTitle => $"{ActionName} - {Resource.Lbl_ActionSettings}";
 
         public bool IsEnabled { get; set; }
 
@@ -130,7 +131,7 @@ namespace RemoteUpdater.PlugIns.Core.ViewModels
             {
                 if (showError)
                 {
-                    MessageBox.Show(ViewModelBase.MainWindow32, exc.ToString(), $"Fehler {_copyAction.Action.ActionName}", MessageBoxButtons.OK);
+                    MessageBox.Show(ViewModelBase.MainWindow32, exc.ToString(), $"{Resource.Txt_Error} {_copyAction.Action.ActionName}", MessageBoxButtons.OK);
                 }
             }
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using RemoteUpdater.Contracts;
+using RemoteUpdater.Sender.Language;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -38,17 +39,17 @@ namespace RemoteUpdater.Sender.Communication
 
             _connection = null;
 
-            ConnectionChanged?.Invoke("Nicht verbunden");
+            ConnectionChanged?.Invoke(Resource.Txt_ConnectionStatusNotConnected);
         }
 
         private async Task OnClosed(Exception arg)
         {
-            await ConnectionChanged?.Invoke("Nicht verbunden");
+            await ConnectionChanged?.Invoke(Resource.Txt_ConnectionStatusNotConnected);
         }
 
         private async Task OnReconnected(string arg)
         {
-            await ConnectionChanged?.Invoke($"Verbunden mit {Helper.SettingsHelper.Settings.ReceiverIp}:{Helper.SettingsHelper.Settings.ReceiverPort}");
+            await ConnectionChanged?.Invoke($"{Resource.Txt_ConnectionStatusConnected} {Helper.SettingsHelper.Settings.ReceiverIp}:{Helper.SettingsHelper.Settings.ReceiverPort}");
         }
 
         private async Task<bool> Connect()
@@ -60,11 +61,11 @@ namespace RemoteUpdater.Sender.Communication
                 {
                     await _connection.StartAsync();
 
-                    await ConnectionChanged($"Verbunden mit {Helper.SettingsHelper.Settings.ReceiverIp}:{Helper.SettingsHelper.Settings.ReceiverPort}");
+                    await ConnectionChanged($"{Resource.Txt_ConnectionStatusConnected} {Helper.SettingsHelper.Settings.ReceiverIp}:{Helper.SettingsHelper.Settings.ReceiverPort}");
                 }
                 catch (Exception e)
                 {
-                    ConnectionError.Invoke("Die Verbindung zum Empfänger konnte nicht hergestellt werden.");
+                    ConnectionError.Invoke(Resource.Error_ConnectionNotPossible);
                 }
             }
 

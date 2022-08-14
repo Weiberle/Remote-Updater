@@ -1,9 +1,12 @@
 ﻿using RemoteUpdater.Common.Helper;
 using RemoteUpdater.Contracts;
 using RemoteUpdater.Sender.Helper;
+using RemoteUpdater.Sender.Language;
 using RemoteUpdater.Sender.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,7 +32,7 @@ namespace RemoteUpdater.Sender
         {
             InitializeComponent();
 
-            AppDomain.CurrentDomain.UnhandledException += (sender, args) => MessageBox.Show(this, args.ExceptionObject.ToString(), "Fehler", MessageBoxButtons.OK);
+            AppDomain.CurrentDomain.UnhandledException += (sender, args) => MessageBox.Show(this, args.ExceptionObject.ToString(), Resource.Txt_Error, MessageBoxButtons.OK);
 
             DispatcherHelper.Init();
 
@@ -94,10 +97,24 @@ namespace RemoteUpdater.Sender
             {
                 try
                 {
-                    string[] files = (string[])e.Data.GetData(System.Windows.Forms.DataFormats.FileDrop);
+                    string[] items = (string[])e.Data.GetData(System.Windows.Forms.DataFormats.FileDrop);
 
-                    if(files != null)
+                    if(items != null)
                     {
+                        var files = new List<string>();
+
+                        foreach (var item in items)
+                        {
+                            if (Directory.Exists(item))
+                            {
+                                files.AddRange(Directory.GetFiles(item, "*", SearchOption.AllDirectories));
+                            }
+                            else if (File.Exists(item))
+                            {
+                                files.Add(item);
+                            }
+                        }
+
                         _dataContext.AddFiles(files);
                     }
                 }

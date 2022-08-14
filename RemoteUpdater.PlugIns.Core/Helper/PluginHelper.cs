@@ -29,7 +29,7 @@ namespace RemoteUpdater.PlugIns.Core.Helper
             }
             catch (Exception e)
             {
-                Trace.WriteLine($"Fehler beim Instanzieren vom Typ {type}. Exception {e}");
+                Trace.WriteLine($"Error creating an instance of {type}. Exception {e}");
             }
 
             return default;
@@ -84,7 +84,7 @@ namespace RemoteUpdater.PlugIns.Core.Helper
             }
             catch (Exception e)
             {
-                Trace.WriteLine($"Fehler beim Laden der Plug-Ins. Exception {e}");
+                Trace.WriteLine($"Error loading Plug-Ins. Exception {e}");
             }
 
             return result;
@@ -99,7 +99,7 @@ namespace RemoteUpdater.PlugIns.Core.Helper
             }
             catch (Exception e)
             {
-                Trace.WriteLine($"Fehler beim Ermitteln der Typen aus dem Assembly {assembly.FullName}. Exception {e}");
+                Trace.WriteLine($"Error getting types form Assembly {assembly.FullName}. Exception {e}");
             }
             return result;
         }

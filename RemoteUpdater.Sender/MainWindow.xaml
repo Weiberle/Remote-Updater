@@ -3,11 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:language = "clr-namespace:RemoteUpdater.Sender.Language"
         mc:Ignorable="d"
         IsEnabled="{Binding IsEnabled}"
         SnapsToDevicePixels="True"
         WindowStartupLocation="CenterScreen"
-        Title="Remote-Updater Sender" Height="450" Width="800" MinHeight="250" MinWidth="500" Background="{x:Static SystemColors.ControlBrush}">
+        Title="{x:Static language:Resource.MainWindow_Title}" Height="450" Width="800" MinHeight="250" MinWidth="500" Background="{x:Static SystemColors.ControlBrush}">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
         <BitmapImage x:Key="FolderIconSource" UriSource="./Images/FolderAdd.png" />
@@ -22,7 +23,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <TabControl >
-            <TabItem Name="FilesTabItem" Header="Übertragbare Dateien" Width="140" Height="30">
+            <TabItem Name="FilesTabItem" Header="{x:Static language:Resource.Tab_TransferableFiles}" Width="140" Height="30">
 
                 <Grid >
                     <Grid.RowDefinitions>
@@ -50,12 +51,11 @@
                             Margin="0,4,0,0" 
                             Command="{Binding SelectDeselectAllCommand}" 
                             IsChecked="{Binding SelectDeselectAllIsChecked}" 
-                            HorizontalAlignment="Left" 
-                            ToolTip="Alle slektieren/deselektieren"/>
-                        <Button Grid.Column="3" Height="23" Width="23" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="RemoveAllButton" Command="{Binding RemoveAllFilesCommand}" ToolTip="Alle Dateien entfernen">
+                            HorizontalAlignment="Left" />
+                        <Button Grid.Column="3" Height="23" Width="23" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="RemoveAllButton" Command="{Binding RemoveAllFilesCommand}" ToolTip="{x:Static language:Resource.ToolTip_RemoveAllFiles}">
                             <Image Source="{StaticResource TrashcanIconSource}" Margin="1"/>
                         </Button>
-                        <Button Grid.Column="5" Height="23" Width="23" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="AddButton" Command="{Binding AddFilesCommand}" ToolTip="Neue Dateien hinzufügen">
+                        <Button Grid.Column="5" Height="23" Width="23" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="AddButton" Command="{Binding AddFilesCommand}" ToolTip="{x:Static language:Resource.ToolTip_AddNewFiles}">
                             <Image Source="{StaticResource FolderIconSource}" Margin="1,3,1,1"/>
                         </Button>
                     </Grid>
@@ -70,32 +70,32 @@
 
                         <ListView.ContextMenu >
                             <ContextMenu Visibility="{Binding Path=ContextMenuVisible, Converter={StaticResource VisibleIfTrueConverter}}">
-                                <MenuItem Command="{Binding RemoveSelectedFilesCommand}" Header="Selektierte Dateie(n) entfernen">
+                                <MenuItem Command="{Binding RemoveSelectedFilesCommand}" Header="{x:Static language:Resource.CMenue_RemoveSelectedFiles}">
                                     <MenuItem.Icon>
                                         <Image Source="{StaticResource TrashcanIconSource}"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Command="{Binding RemoveAllFilesCommand}" Header="Alle Dateien entfernen">
+                                <MenuItem Command="{Binding RemoveAllFilesCommand}" Header="{x:Static language:Resource.CMenue_RemoveAllFiles}">
                                     <MenuItem.Icon>
                                         <Image Source="{StaticResource TrashcanIconSource}"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Command="{Binding SelectSelectedCommand }" Header="Selektierte Dateie(n) anwählen">
+                                <MenuItem Command="{Binding SelectSelectedCommand }" Header="{x:Static language:Resource.CMenue_SelectChoosenFiles}">
                                     <MenuItem.Icon>
                                         <Image Source="{StaticResource CheckBoxCheckedIconSource}"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Command="{Binding SelectAllCommand}" Header="Alle Dateien anwählen">
+                                <MenuItem Command="{Binding SelectAllCommand}" Header="{x:Static language:Resource.CMenue_SelectAllFiles}">
                                     <MenuItem.Icon>
                                         <Image Source="{StaticResource CheckBoxCheckedIconSource}"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Command="{Binding DeselectSelectedCommand}" Header="Selektierte Dateie(n) abwählen">
+                                <MenuItem Command="{Binding DeselectSelectedCommand}" Header="{x:Static language:Resource.CMenue_DeselectChoosenFiles}">
                                     <MenuItem.Icon>
                                         <Image Source="{StaticResource CheckBoxUncheckedIconSource}"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Command="{Binding DeselectAllCommand}" Header="Alle Dateien abwählen">
+                                <MenuItem Command="{Binding DeselectAllCommand}" Header="{x:Static language:Resource.CMenue_DelslectAllFiles}">
                                     <MenuItem.Icon>
                                         <Image Source="{StaticResource CheckBoxUncheckedIconSource}"/>
                                     </MenuItem.Icon>
@@ -121,7 +121,7 @@
                                     <CheckBox Grid.Column="1" IsChecked="{Binding IsSelected, Mode=TwoWay}" VerticalAlignment="Center"/>
                                     <TextBlock Grid.Column="3" Text="{Binding FilePath}" VerticalAlignment="Center"/>
                                     <TextBlock Grid.Column="5" Text="{Binding Size}" VerticalAlignment="Center"/>
-                                    <Button Grid.Column="7" Width="23" Height="23" Command="{Binding ElementName=FilesListView, Path=DataContext.RemoveFileCommand}" CommandParameter="{Binding}" ToolTip="Datei entfernen" VerticalAlignment="Center">
+                                    <Button Grid.Column="7" Width="23" Height="23" Command="{Binding ElementName=FilesListView, Path=DataContext.RemoveFileCommand}" CommandParameter="{Binding}" ToolTip="{x:Static language:Resource.ToolTip_RemoveFile}" VerticalAlignment="Center">
                                         <Image Source="{StaticResource TrashcanIconSource}" Margin="1"/>
                                     </Button>
                                 </Grid>
@@ -132,7 +132,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Einstellungen" Width="140" Height="30" DataContext="{Binding SettingsVm}">
+            <TabItem Header="{x:Static language:Resource.Tab_Settings}" Width="140" Height="30" DataContext="{Binding SettingsVm}">
                 <Grid Margin="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
@@ -152,18 +152,18 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Label FontWeight="Bold" HorizontalAlignment="Right">Remote-Updater Empfänger IP:</Label>
+                    <Label FontWeight="Bold" HorizontalAlignment="Right" Content="{x:Static language:Resource.Lbl_IpReceiver}"/>
                     <TextBox Grid.Row="0" Grid.Column="2" AcceptsReturn="False" VerticalAlignment="Center" Text="{Binding ReceiverIp}"></TextBox>
-                    <Label Grid.Row="2" HorizontalAlignment="Right" FontWeight="Bold">Remote-Updater Empfänger  Port:</Label>
+                    <Label Grid.Row="2" HorizontalAlignment="Right" FontWeight="Bold" Content="{x:Static language:Resource.Lbl_PortReceiver}" />
                     <TextBox Grid.Row="2" Grid.Column="2" Width="60" AcceptsReturn="False" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding ReceiverPort}"></TextBox>
-                    <Label Grid.Row="4" HorizontalAlignment="Right" FontWeight="Bold">In den Vordergrund bei Update-Fehler:</Label>
+                    <Label Grid.Row="4" HorizontalAlignment="Right" FontWeight="Bold" Content="{x:Static language:Resource.Lbl_BringToFrontOnError}"/>
                     <CheckBox Grid.Row="4" Grid.Column="2" Width="16" HorizontalAlignment="Left" IsChecked="{Binding BringToFrontOnError}" VerticalAlignment="Center"/>
-                    <Label Grid.Row="6" HorizontalAlignment="Right" FontWeight="Bold" >Auto-Update:</Label>
+                    <Label Grid.Row="6" HorizontalAlignment="Right" FontWeight="Bold" Content="{x:Static language:Resource.Lbl_AutoUpdate}"/>
                     <CheckBox Grid.Row="6" Grid.Column="2" Width="16" HorizontalAlignment="Left" VerticalAlignment="Center"  IsChecked="{Binding AutoUpdate}"/>
-                    <Label Grid.Row="8" HorizontalAlignment="Right" FontWeight="Bold">Auto-Update Verzögerung:</Label>
+                    <Label Grid.Row="8" HorizontalAlignment="Right" FontWeight="Bold" Content="{x:Static language:Resource.Lbl_AutoUpdateDelay}"/>
                     <StackPanel Grid.Row="8" Grid.Column="2" Orientation="Horizontal">
                         <TextBox  Width="60" AcceptsReturn="False" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding AutoUpdateDelayInSec}"></TextBox>
-                        <Label>Sekunden</Label>
+                        <Label Content="{x:Static language:Resource.Unit_Seconds}"/>
                     </StackPanel>
 
                 </Grid>
@@ -177,10 +177,10 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" VerticalAlignment="Center">Verbindungsstatus:</Label>
+            <Label Grid.Column="0" VerticalAlignment="Center" Content="{x:Static language:Resource.Lbl_ConnectionSatus}"/>
             <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{Binding ConnectionState}"/>
-            <ProgressBar Name="TransferProgessbar" Grid.Column="2" Margin="10,0,10,0" Height="10" IsIndeterminate="True" VerticalAlignment="Center" Visibility="{Binding Path=IsSending, Converter={StaticResource VisibleIfTrueConverter}}"></ProgressBar>
-            <Button Grid.Column="3" HorizontalAlignment="Right" Height="30" Width="120"  x:Name="DeleteButton" Command="{Binding  SendFilesCommand}">Dateien senden</Button>
+            <ProgressBar Name="TransferProgessbar" Grid.Column="2" Margin="10,0,10,0" Height="10" IsIndeterminate="True" VerticalAlignment="Center" Visibility="{Binding Path=IsSending, Converter={StaticResource VisibleIfTrueConverter}}"/>
+            <Button Grid.Column="3" HorizontalAlignment="Right" Height="30" Width="120"  x:Name="DeleteButton" Command="{Binding  SendFilesCommand}" Content="{x:Static language:Resource.Btn_SendFiles}"/>
         </Grid>
     </Grid>
 </Window>

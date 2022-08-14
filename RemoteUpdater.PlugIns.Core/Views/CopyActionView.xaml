@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:language = "clr-namespace:RemoteUpdater.PlugIns.Core.Language"             
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="200">
     <UserControl.Resources>
@@ -20,11 +21,11 @@
         </Grid.ColumnDefinitions>
         <CheckBox IsChecked="{Binding IsEnabled}" VerticalAlignment="Center"></CheckBox>
         <TextBlock Grid.Column="2" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding ActionName}" />
-        <Button Grid.Column="3" Width="23" Height="23" ToolTip="Einstellungen" Command="{Binding ShowSettingsCommand}" Visibility="{Binding HasSettings, Converter={StaticResource VisibleIfTrueConverter}}">
+        <Button Grid.Column="3" Width="23" Height="23" ToolTip="{x:Static language:Resource.ToolTipBtn_ActionSettings}" Command="{Binding ShowSettingsCommand}" Visibility="{Binding HasSettings, Converter={StaticResource VisibleIfTrueConverter}}">
             <!--<Image Source="{StaticResource SettingsIconSource}" Margin="2,2,1,1"/>-->
             ...
         </Button>
-        <Button Grid.Column="5" Width="23" Height="23" ToolTip="Test" Command="{Binding ExecuteActionCommand}">
+        <Button Grid.Column="5" Width="23" Height="23" ToolTip="{x:Static language:Resource.ToolTipBtn_ActionTest}" Command="{Binding ExecuteActionCommand}">
             <Polygon Margin="2" Points="0,0 8,5, 0,10" Stroke="{Binding ExecutionColor}"  Fill="{Binding ExecutionColor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Button>
     </Grid>

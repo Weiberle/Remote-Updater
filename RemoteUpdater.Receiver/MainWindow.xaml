@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:core="clr-namespace:RemoteUpdater.PlugIns.Core.Views;assembly=RemoteUpdater.PlugIns.Core"
+        xmlns:language = "clr-namespace:RemoteUpdater.Receiver.Language"
         mc:Ignorable="d"
         IsEnabled="{Binding IsEnabled}"
         SnapsToDevicePixels="True"
         WindowStartupLocation="CenterScreen"
-        Title="Remote Updater Empfänger" MinHeight="250" MinWidth="500" Height="450" Width="800" Background="{x:Static SystemColors.ControlBrush}">
+        Title="{x:Static language:Resource.MainWindow_Title}" MinHeight="250" MinWidth="500" Height="450" Width="800" Background="{x:Static SystemColors.ControlBrush}">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
         <BitmapImage x:Key="FolderIconSource" UriSource="./Images/Folder.png" />
@@ -17,7 +18,7 @@
     </Window.Resources>
     <Grid >
         <TabControl Margin="20">
-            <TabItem Header="Empfangene Dateien" Name="FilesTabItem" Width="140" Height="30">
+            <TabItem Header="{x:Static language:Resource.Tab_ReceivedFiles}" Name="FilesTabItem" Width="140" Height="30">
                 <Grid Grid.IsSharedSizeScope="True">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10"/>
@@ -37,11 +38,11 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Rectangle Width="5" Margin="9,0,5,0" Height="23" Fill="{Binding StatusColor, Mode=OneWay}" Visibility="{Binding Path=StatusColorVisible, Converter={StaticResource VisibleIfTrueConverter}}"/>
-                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Visibility="{Binding Path=StatusColorVisible, Converter={StaticResource VisibleIfTrueConverter}}">Update-Status</TextBlock>
-                        <Button Grid.Column="3" Height="23" Width="23" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="RemoveAllButton" Command="{Binding SelectTarget4AllCommand}" ToolTip="Zielordner für alle Dateie(n) festlegen">
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Visibility="{Binding Path=StatusColorVisible, Converter={StaticResource VisibleIfTrueConverter}}" Text="{x:Static language:Resource.Lbl_UpdateStatus}"/>
+                        <Button Grid.Column="3" Height="23" Width="23" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="RemoveAllButton" Command="{Binding SelectTarget4AllCommand}" ToolTip="{x:Static language:Resource.ToolTipBtn_SelectTargetFolderForAllFiles}">
                             <Image Source="{StaticResource FolderIconSource}" Margin="1,3,1,1"/>
                         </Button>
-                        <Button Grid.Column="5" Height="23" Width="23" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="AddButton" Command="{Binding SelectTarget4SelectedCommand}" ToolTip="Zielordner für selektierte Dateie(n) festlegen">
+                        <Button Grid.Column="5" Height="23" Width="23" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="AddButton" Command="{Binding SelectTarget4SelectedCommand}" ToolTip="{x:Static language:Resource.ToolTipBtn_SelectTargetFolderForChoosenFiles}">
                             <Image Source="{StaticResource FolderSelectedIconSource}" Margin="1,3,1,1"/>
                         </Button>
                     </Grid>
@@ -49,12 +50,12 @@
                     <ListView Grid.Row="3" Margin="10,0" x:Name="FilesListView" ItemsSource="{Binding Files}" SelectionChanged="OnSelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible">
                         <ListView.ContextMenu>
                             <ContextMenu Visibility="{Binding Path=ContextMenuVisible, Converter={StaticResource VisibleIfTrueConverter}}">
-                                <MenuItem Command="{Binding SelectTarget4SelectedCommand}" Header="Zielordner für selektierte Dateie(n) festlegen">
+                                <MenuItem Command="{Binding SelectTarget4SelectedCommand}" Header="{x:Static language:Resource.CMenue_SelectTargetFolderForChoosenFiles}">
                                     <MenuItem.Icon>
                                         <Image Source="{StaticResource FolderIconSource}" Margin="2,3,2,2"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Command="{Binding SelectTarget4AllCommand}" Header="Zielordner für alle Dateien festlegen">
+                                <MenuItem Command="{Binding SelectTarget4AllCommand}" Header="{x:Static language:Resource.CMenue_SelectTargetFolderForAllFiles}">
                                     <MenuItem.Icon>
                                         <Image Source="{StaticResource FolderIconSource}" Margin="2,3,2,2"/>
                                     </MenuItem.Icon>
@@ -89,7 +90,7 @@
                                     <TextBlock Grid.Column="2" Text="{Binding SourceFile}" VerticalAlignment="Center"/>
                                     <Image Grid.Column="3" Margin="5,0" Source="{StaticResource ArrowIconSource}" Visibility="{Binding Path=TargetIsValid, Converter={StaticResource VisibleIfTrueConverter}}"/>
                                     <TextBlock  Grid.Column="4" Text="{Binding TargetFolder}" VerticalAlignment="Center"/>
-                                    <Button Grid.Column="7" Width="23" Height="23" Command="{Binding SelectTargetCommand}" VerticalAlignment="Center" ToolTip="Zielordner festlegen">
+                                    <Button Grid.Column="7" Width="23" Height="23" Command="{Binding SelectTargetCommand}" VerticalAlignment="Center" ToolTip="{x:Static language:Resource.ToolTipBtn_SelectTargetFolder}">
                                         <Image Source="{StaticResource FolderIconSource}" Margin="1,3,1,1"/>
                                     </Button>
                                 </Grid>
@@ -99,11 +100,11 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Actions" Width="140" Height="30" DataContext="{Binding PlugInsVm}">
+            <TabItem Header="{x:Static language:Resource.Tab_Actions}" Width="140" Height="30" DataContext="{Binding PlugInsVm}">
                 <core:PlugInsView Margin="10"></core:PlugInsView>
             </TabItem>
 
-            <TabItem Header="Einstellungen" Width="140" Height="30" DataContext="{Binding SettingsVm}">
+            <TabItem Header="{x:Static language:Resource.Tab_Settings}" Width="140" Height="30" DataContext="{Binding SettingsVm}">
                 <Grid Margin="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
@@ -120,16 +121,16 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" HorizontalAlignment="Right" FontWeight="Bold">IP-Adresse:</Label>
+                    <Label Grid.Row="0" HorizontalAlignment="Right" FontWeight="Bold" Content="{x:Static language:Resource.Lbl_IpAddress}"/>
                     <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Ip4Address}"></TextBlock>
-                    <Label Grid.Row="2" HorizontalAlignment="Right" FontWeight="Bold">Port:</Label>
+                    <Label Grid.Row="2" HorizontalAlignment="Right" FontWeight="Bold" Content="{x:Static language:Resource.Lbl_Port}"/>
                     <TextBox Grid.Row="2" Grid.Column="2" Width="60" HorizontalAlignment="Left" AcceptsReturn="False" VerticalAlignment="Center" Text="{Binding Port}"></TextBox>
-                    <Label Grid.Row="4" HorizontalAlignment="Right" FontWeight="Bold">In den Vordergrund bei Update-Fehler:</Label>
+                    <Label Grid.Row="4" HorizontalAlignment="Right" FontWeight="Bold" Content="{x:Static language:Resource.Lbl_BringToFrontOnError}"/>
                     <CheckBox Grid.Row="4" Grid.Column="2" Width="16" HorizontalAlignment="Left" IsChecked="{Binding BringToFrontOnError}" VerticalAlignment="Center"/>
-                    <Label Grid.Row="6" HorizontalAlignment="Right" FontWeight="Bold">Übertragungs-Timeout:</Label>
+                    <Label Grid.Row="6" HorizontalAlignment="Right" FontWeight="Bold" Content="{x:Static language:Resource.Lbl_Timeout}"/>
                     <StackPanel Grid.Row="6" Grid.Column="2" Orientation="Horizontal">
                         <TextBox  Width="60" AcceptsReturn="False" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding TimeOut}"></TextBox>
-                        <Label>Minuten</Label>
+                        <Label Content="{x:Static language:Resource.Unit_Minutes}"/>
                     </StackPanel>
                 </Grid>
             </TabItem>

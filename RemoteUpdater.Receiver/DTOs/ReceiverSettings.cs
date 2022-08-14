@@ -13,5 +13,7 @@ namespace RemoteUpdater.Receiver.DTOs
         public bool BringToFrontOnError { get; set; } = true;
 
         public List<SourceTargetSetting> SourceTargetMappings { get; set; } = new List<SourceTargetSetting>();
+
+        public string Langugage { get; set; }
     }
 }

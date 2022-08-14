@@ -8,7 +8,7 @@ namespace RemoteUpdater.Common.Helper
     {
         public static string GetIp4Address()
         {
-            string localIP = "127.0.0.1";
+            string? localIP = "127.0.0.1";
 
             try
             {
@@ -16,13 +16,16 @@ namespace RemoteUpdater.Common.Helper
                 {
 
                     socket.Connect("8.8.8.8", 65530);
-                    IPEndPoint endPoint = socket.LocalEndPoint as IPEndPoint;
-                    localIP = endPoint.Address.ToString();
+                    IPEndPoint? endPoint = socket.LocalEndPoint as IPEndPoint;
+                    if (endPoint != null)
+                    {
+                        localIP = endPoint.Address.ToString();
+                    }
                 }
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
-                Trace.WriteLine($"Fehler beim Ermitteln der IP Adresse. Exception: {e}");
+                Trace.WriteLine($"Error getting IP Adresse. Exception: {e}");
             }
 
             return localIP;

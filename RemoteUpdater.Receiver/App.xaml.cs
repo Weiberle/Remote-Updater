@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using RemoteUpdater.Receiver.Helper;
 using System.Windows;
 
 namespace RemoteUpdater.Receiver
@@ -13,5 +8,12 @@ namespace RemoteUpdater.Receiver
     /// </summary>
     public partial class App : Application
     {
+        App()
+        {
+            if (!string.IsNullOrWhiteSpace(SettingsHelper.Settings.Langugage))
+            {
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(SettingsHelper.Settings.Langugage);
+            }
+        }
     }
 }

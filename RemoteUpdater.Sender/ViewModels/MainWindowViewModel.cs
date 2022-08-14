@@ -4,6 +4,7 @@ using RemoteUpdater.Common.Helper;
 using RemoteUpdater.Contracts;
 using RemoteUpdater.Sender.Communication;
 using RemoteUpdater.Sender.Helper;
+using RemoteUpdater.Sender.Language;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,7 +33,7 @@ namespace RemoteUpdater.Sender.ViewModels
 
         public FilesViewModel Files { get; set; } = new FilesViewModel();
 
-        public string ConnectionState { get; set; } = "Unbekannt";
+        public string ConnectionState { get; set; } = Resource.Txt_ConnectionStatusUnknown;
 
         public SettingsViewModel SettingsVm { get; set; }
 
@@ -110,7 +111,7 @@ namespace RemoteUpdater.Sender.ViewModels
         {
             IsSending = false;
             OnPropertyChanged(nameof(IsSending));
-            ShowMessage?.Invoke(new MessageDto { Caption = "Fehler", Message = errorMessage, MessageType = MessageTypeEnum.Error });
+            ShowMessage?.Invoke(new MessageDto { Caption = Resource.Txt_Error, Message = errorMessage, MessageType = MessageTypeEnum.Error });
             IsEnabled = true;
             OnPropertyChanged(nameof(IsEnabled));
             UpdateButtonStates();
@@ -161,7 +162,7 @@ namespace RemoteUpdater.Sender.ViewModels
                 UpdateErrorOccured?.Invoke();
                 ShowMessage(new MessageDto
                 {
-                    Caption = "Fehler beim Sender der Dateien.",
+                    Caption = Resource.Error_WhileSendingFiles,
                     Message = e.ToString(),
                     MessageType = MessageTypeEnum.Error
                 });
@@ -307,11 +308,11 @@ namespace RemoteUpdater.Sender.ViewModels
 
             if (SelectDeselectAllIsChecked)
             {
-                SelectDeselectText = $"  Alle Dateien abwählen {countInfo}";
+                SelectDeselectText = $"  {Resource.CMenue_DelslectAllFiles} {countInfo}";
             }
             else
             {
-                SelectDeselectText = $"  Alle Dateien auswählen {countInfo}";
+                SelectDeselectText = $"  {Resource.CMenue_SelectAllFiles} {countInfo}";
             }
 
             OnPropertyChanged(nameof(SelectDeselectText));

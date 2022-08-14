@@ -9,7 +9,7 @@ namespace Demo.Plugin
 
         public bool HasSettings => false;
 
-        public string Description => "Beispiel einer PostCopy-Action";
+        public string Description => "Example PostCopy-Action";
 
         public bool Execute()
         {

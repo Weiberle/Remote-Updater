@@ -15,5 +15,7 @@ namespace RemoteUpdater.Sender.Settings
         public bool BringToFrontOnError { get; set; } = true;
 
         public List<SourceSetting> SourceFiles { get; set; } = new List<SourceSetting>();
+
+        public string Langugage { get; set; } 
     }
 }

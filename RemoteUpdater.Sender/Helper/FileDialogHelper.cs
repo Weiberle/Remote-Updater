@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using RemoteUpdater.Sender.Language;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace RemoteUpdater.Sender.Helper
@@ -11,7 +12,7 @@ namespace RemoteUpdater.Sender.Helper
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
-            openFileDialog.Title = "Dateiauswahl";
+            openFileDialog.Title = Resource.FileDialog_Title;
 
             openFileDialog.Multiselect = true;
 

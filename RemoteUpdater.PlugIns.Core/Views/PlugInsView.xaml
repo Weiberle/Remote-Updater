@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:dd="urn:gong-wpf-dragdrop" 
              xmlns:core="clr-namespace:RemoteUpdater.PlugIns.Core.Views"
+             xmlns:language = "clr-namespace:RemoteUpdater.PlugIns.Core.Language"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -21,7 +22,7 @@
             <RowDefinition Height="5"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <CheckBox FontWeight="Bold" Margin="7,0" VerticalAlignment="Center" IsChecked="{Binding PreCopyActionsEnabled}">Pre-Copy Actions</CheckBox>
+        <CheckBox FontWeight="Bold" Margin="7,0" VerticalAlignment="Center" IsChecked="{Binding PreCopyActionsEnabled}" Content="{x:Static language:Resource.Lbl_PreCopyActions}"/>
         <ListView Grid.Row="2" 
                   IsEnabled="{Binding PreCopyActionsEnabled}"
                   ItemsSource="{Binding PreCopyActions}"  
@@ -38,7 +39,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <CheckBox Grid.Column="2" FontWeight="Bold"  Margin="7,0" VerticalAlignment="Center" IsChecked="{Binding PostCopyActionsEnabled}">Post-Copy Actions</CheckBox>
+        <CheckBox Grid.Column="2" FontWeight="Bold"  Margin="7,0" VerticalAlignment="Center" IsChecked="{Binding PostCopyActionsEnabled}" Content="{x:Static language:Resource.Lbl_PostCopyActions}"/>
         <ListView Grid.Column="2" 
                   Grid.Row="2" 
                   IsEnabled="{Binding PostCopyActionsEnabled}"                  

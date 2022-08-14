@@ -2,16 +2,17 @@
 using RemoteUpdater.Common.Helper;
 using RemoteUpdater.Contracts;
 using RemoteUpdater.Contracts.Interfaces;
+using StartStopWindowsService.Plugin.Language;
 
 namespace StartStopWindowsService.Plugin
 {
     public class PostCopyAction : ViewModelBase, IPostCopyAction
     {
-        public string ActionName => "Windows-Dienst Starter";
+        public string ActionName => Resource.Txt_StarterActionName;
 
         public bool HasSettings => true;
 
-        public string Description => "Diese Action startet einen Windows-Dienst";
+        public string Description => Resource.Txt_StarterActionDescription;
 
         private CopyActionSettingsHelper _copyActionSettingsHelper;
 

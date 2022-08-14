@@ -11,13 +11,13 @@ namespace Demo.Plugin
 
         public bool HasSettings => true;
 
-        public string Description => "Beispiel einer PreCopy-Action";
+        public string Description => "Example PreCopy-Action";
 
         public bool Execute()
         {
             if (_copyActionSettings.First().SettingValue.ToLower().Trim() == "true")
                     {
-                throw new Exception("Das Ausführen der Action hat einen Fehler verursacht.");
+                throw new Exception("Execution of action failed.");
             }
             return true;
         }

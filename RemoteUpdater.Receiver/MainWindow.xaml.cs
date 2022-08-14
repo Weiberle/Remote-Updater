@@ -2,6 +2,7 @@
 using RemoteUpdater.Common.Helper;
 using RemoteUpdater.Receiver.Communication;
 using RemoteUpdater.Receiver.Helper;
+using RemoteUpdater.Receiver.Language;
 using RemoteUpdater.Receiver.ViewModels;
 using System;
 using System.ComponentModel;
@@ -32,7 +33,7 @@ namespace RemoteUpdater.Receiver
         {
             InitializeComponent();
 
-            AppDomain.CurrentDomain.UnhandledException += (sender, args) => MessageBox.Show(this, args.ExceptionObject.ToString(), "Fehler", MessageBoxButtons.OK);
+            AppDomain.CurrentDomain.UnhandledException += (sender, args) => MessageBox.Show(this, args.ExceptionObject.ToString(), Resource.Txt_Error, MessageBoxButtons.OK);
 
             DispatcherHelper.Init();
 

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:viewmodels="clr-namespace:RemoteUpdater.PlugIns.Core.ViewModels" 
+        xmlns:language = "clr-namespace:RemoteUpdater.PlugIns.Core.Language"        
         d:DataContext="{d:DesignInstance Type=viewmodels:CopyActionViewModel}"
         mc:Ignorable="d"
         SnapsToDevicePixels="True"
@@ -26,10 +27,10 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical" Margin="0,0,0,20" Visibility="{Binding Path=HasDescription, Converter={StaticResource VisibleIfTrueConverter}}">
-            <TextBlock FontWeight="Bold" Margin="0,0,0,5">Beschreibung:</TextBlock>
+            <TextBlock FontWeight="Bold" Margin="0,0,0,5" Text="{x:Static language:Resource.Lbl_ActionDescription}"/>
             <TextBlock Text="{Binding Description}" TextWrapping="Wrap"></TextBlock>
         </StackPanel>
-        <TextBlock Grid.Row="1" FontWeight="Bold">Einstellungen:</TextBlock>
+        <TextBlock Grid.Row="1" FontWeight="Bold" Text="{x:Static language:Resource.Lbl_ActionSettings}"/>
         <ItemsControl Grid.Row="3" ItemsSource="{Binding Settings}" Margin="0,0,0,-5">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
@@ -52,8 +53,8 @@
                 <ColumnDefinition Width=" auto"/>
                 <ColumnDefinition Width=" auto"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Margin="10,0" Width="120" Height="30" IsDefault="True" Command="{Binding SaveSettingsCommand}">Speichern</Button>
-            <Button Grid.Column="2" Width="120" Height="30" IsCancel="True">Abbrechen</Button>
+            <Button Grid.Column="1" Margin="10,0" Width="120" Height="30" IsDefault="True" Command="{Binding SaveSettingsCommand}" Content="{x:Static language:Resource.Btn_ActionSaveSettings}"/>
+            <Button Grid.Column="2" Width="120" Height="30" IsCancel="True" Content="{x:Static language:Resource.Btn_ActionCancelSettings}"/>
         </Grid>
     </Grid>
 </Window>
