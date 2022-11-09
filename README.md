@@ -32,7 +32,7 @@ Remote-Updater consists of two applications a **sender** and a **receiver**, one
 
 ![alt text](https://github.com/Weiberle/Remote-Updater/blob/master/ReadMeImages//sr_02.jpg?raw=true)
 
-After the file-information was transfered, the files are listed on the receiver also. The status indicator changes to orange, this means the file-information was transfered but the files were not copied/updated because of no targetfolder was selected yet.
+After the file-information was transfered, the files are listed on the receiver also. The status indicator changes to orange, this means the file-information was transfered but the files were not copied/updated because no targetfolder was selected yet.
 
 ![alt text](https://github.com/Weiberle/Remote-Updater/blob/master/ReadMeImages//sr_03.jpg?raw=true)
 
@@ -95,7 +95,7 @@ namespace RemoteUpdater.Contracts.Interfaces
     }
 }
 ```
-After building your actions, place the DLLs and all depending files in a custom folder below the Plug-Ins folder of the receiver applicaiton. The Receiver will find your actions via reflection. 
+After building your actions, place the DLLs and all depending files in a custom folder below the `Plugins` folder of the receiver application. The Receiver will find your actions via reflection. 
 
 Within the Actions Tab you can see all copy-actions. The order can be changed via Drag & Drop. You can test the actions by pressing the playbutton. If the action was executed successfully the button turns green, if the action fails the button turns red. Settings can be changed after pressing the settingsbutton. Unchecking the checkboxes you an exclude the actions from beeing executed. 
 
